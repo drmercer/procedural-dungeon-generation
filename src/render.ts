@@ -1,4 +1,5 @@
-import { DungeonMap, Point, Box, Tile } from "./map";
+import { DungeonMap, Tile } from "./map";
+import { Box, Point } from "./shape";
 
 export type TileColorFn = (tile: Tile) => string;
 

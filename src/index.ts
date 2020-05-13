@@ -1,4 +1,5 @@
-import { DungeonMap, Tile, Point } from './map';
+import { DungeonMap, Tile } from './map';
+import { Point } from './shape';
 import { ensureNotNull } from "./util/assert";
 import { Stepper, AnimationStepper } from './stepper';
 import { Goal } from './feature';

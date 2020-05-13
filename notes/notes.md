@@ -21,4 +21,5 @@ Obstacles
 Other notes
 * Can do multiple sources: just do one source per player
   * Can we require player A to hit a switch at the same time as player B?
+  * Problem: might leave player blocked by another player for a while.
 * Can do multiple sinks (choose your own adventure)

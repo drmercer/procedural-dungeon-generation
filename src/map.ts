@@ -73,11 +73,11 @@ export class DungeonMap {
         if (pt.x < left) {
           left = pt.x;
         }
-        if (pt.x > right) {
-          right = pt.x;
+        if (pt.x + 1 > right) {
+          right = pt.x + 1;
         }
-        if (pt.y > bottom) {
-          bottom = pt.y;
+        if (pt.y + 1 > bottom) {
+          bottom = pt.y + 1;
         }
         if (pt.y < top) {
           top = pt.y;

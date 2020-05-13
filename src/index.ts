@@ -18,7 +18,11 @@ const map = new DungeonMap(() => ({ type: 'wall' }));
 const stepper = new AnimationStepper();
 
 goBtn.onclick = async function () {
-  await populateMap(map, stepper);
+  // await populateMap(map, stepper);
+  map.update(new Point(10, 10), { type: 'bagel' });
+  map.update(new Point(-10, 10), { type: 'bagel' });
+  map.update(new Point(-10, -10), { type: 'bagel' });
+  map.update(new Point(10, -10), { type: 'bagel' });
   await renderMap(ctx, map);
 }
 

@@ -13,17 +13,21 @@ export class Point {
     return new Point(+x, +y);
   }
 
+  public plus(xd: number, yd: number) {
+    return new Point(this.x + xd, this.y + yd);
+  }
+
   public north(distance = 1) {
-    return new Point(this.x, this.y - distance);
+    return this.plus(0, -distance);
   }
   public south(distance = 1) {
-    return new Point(this.x, this.y + distance);
+    return this.plus(0, distance);
   }
   public east(distance = 1) {
-    return new Point(this.x + distance, this.y);
+    return this.plus(distance, 0);
   }
   public west(distance = 1) {
-    return new Point(this.x - distance, this.y);
+    return this.plus(-distance, 0);
   }
 }
 

@@ -20,10 +20,11 @@ const stepper = new AnimationStepper();
 
 goBtn.onclick = async function () {
   // await populateMap(map, stepper);
-  map.update(new Point(10, 10), { type: 'bagel' });
-  map.update(new Point(-10, 10), { type: 'bagel' });
-  map.update(new Point(-10, -10), { type: 'bagel' });
-  map.update(new Point(10, -10), { type: 'bagel' });
+  const center = new Point(0, 0);
+  map.update(center.north(10), { type: 'bagel' });
+  map.update(center.south(10), { type: 'bagel' });
+  map.update(center.west(10), { type: 'bagel' });
+  map.update(center.east(10), { type: 'bagel' });
   await renderMap(ctx, map, tile => {
     switch (tile.type) {
       case 'wall': return 'brown';

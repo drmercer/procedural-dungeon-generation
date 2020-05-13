@@ -14,7 +14,7 @@ const goBtn: HTMLButtonElement = ensureNotNull(document.querySelector('#go'));
 ctx.fillStyle = 'red';
 ctx.fillRect(100, 100, 200, 200);
 
-const map = new DungeonMap(() => ({ type: 'wall' }));
+const map = new DungeonMap({ type: 'wall' });
 const stepper = new AnimationStepper();
 
 goBtn.onclick = async function () {
@@ -23,14 +23,11 @@ goBtn.onclick = async function () {
   map.update(new Point(-10, 10), { type: 'bagel' });
   map.update(new Point(-10, -10), { type: 'bagel' });
   map.update(new Point(10, -10), { type: 'bagel' });
-  await renderMap(ctx, map);
-}
-
-async function populateMap(map: DungeonMap, stepper: Stepper) {
-  // TODO write map gen code
-
-  // Start at the goal
-  map.update(new Point(0, 0), { type: 'goal', feature: Goal() });
-
-
+  await renderMap(ctx, map, tile => {
+    switch (tile.type) {
+      case 'wall': return 'brown';
+      case 'bagel': return 'tan';
+      default: return 'orange';
+    }
+  });
 }

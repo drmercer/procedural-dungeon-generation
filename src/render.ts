@@ -1,14 +1,18 @@
-import { DungeonMap, Point, Box } from "./map";
+import { DungeonMap, Point, Box, Tile } from "./map";
 
-export async function renderMap(context: CanvasRenderingContext2D, map: DungeonMap) {
+export type TileColorFn = (tile: Tile) => string;
+
+export async function renderMap(context: CanvasRenderingContext2D, map: DungeonMap, colorFn: TileColorFn) {
   const bounds = map.measure();
-  console.log("Bounds", { bounds });
   const tileSizePx = Math.min(
     context.canvas.width / bounds.w,
     context.canvas.height / bounds.h,
   );
-  drawArea(context, bounds, tileSizePx, bounds, 'green');
-  drawPoint(context, bounds, tileSizePx, new Point(0, 0), 'chartreuse');
+  drawArea(context, bounds, tileSizePx, bounds, colorFn(map.defaultTile));
+  map.forEachNonDefaultTile((tile, pt) => {
+    const color = colorFn(tile);
+    drawPoint(context, bounds, tileSizePx, pt, color);
+  });
 }
 
 function drawPoint(context: CanvasRenderingContext2D, bounds: Box, tileSizePx: number, pt: Point, fillStyle: string) {

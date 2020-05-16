@@ -3,7 +3,11 @@ import { Box, Point } from "./shape";
 
 export type TileColorFn = (tile: Tile) => string;
 
-export async function renderMap(context: CanvasRenderingContext2D, map: DungeonMap, colorFn: TileColorFn) {
+export async function renderMap(
+  context: CanvasRenderingContext2D,
+  map: DungeonMap,
+  colorFn: TileColorFn,
+) {
   const bounds = map.measure();
   const tileSizePx = Math.min(
     context.canvas.width / bounds.w,
@@ -16,7 +20,13 @@ export async function renderMap(context: CanvasRenderingContext2D, map: DungeonM
   });
 }
 
-function drawPoint(context: CanvasRenderingContext2D, bounds: Box, tileSizePx: number, pt: Point, fillStyle: string) {
+function drawPoint(
+  context: CanvasRenderingContext2D,
+  bounds: Box,
+  tileSizePx: number,
+  pt: Point,
+  fillStyle: string,
+) {
   const area = {
     x: pt.x,
     y: pt.y,
@@ -26,7 +36,13 @@ function drawPoint(context: CanvasRenderingContext2D, bounds: Box, tileSizePx: n
   drawArea(context, bounds, tileSizePx, area, fillStyle);
 }
 
-function drawArea(context: CanvasRenderingContext2D, bounds: Box, tileSizePx: number, area: Box, fillStyle: string) {
+function drawArea(
+  context: CanvasRenderingContext2D,
+  bounds: Box,
+  tileSizePx: number,
+  area: Box,
+  fillStyle: string,
+) {
   context.fillStyle = fillStyle;
   const x = area.x - bounds.x;
   const y = area.y - bounds.y;

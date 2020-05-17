@@ -6,6 +6,7 @@ import { populateMap } from './populate';
 import { strToColor } from './util/color';
 
 const canvas = ensureNotNull(document.querySelector('canvas'));
+const outputDiv = ensureNotNull(document.getElementById('output'));
 const ctx: CanvasRenderingContext2D = ensureNotNull(canvas.getContext('2d'));
 
 const goBtn: HTMLButtonElement = ensureNotNull(document.querySelector('#go'));
@@ -21,6 +22,9 @@ function tileColor(tile: Tile) {
 goBtn.onclick = async function () {
   const map = new DungeonMap({ type: 'wall' });
   const stepper = new AnimationStepper(() => renderMap(ctx, map, tileColor));
+  outputDiv.innerText = "Populating...";
   await populateMap(map, stepper);
+  outputDiv.innerText = "Rendering...";
   await renderMap(ctx, map, tileColor);
+  outputDiv.innerText = "Done";
 }

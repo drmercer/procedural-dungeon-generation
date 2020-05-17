@@ -14,7 +14,7 @@ const FIRST_HALF_MIN_ROOM_SIZE = Math.floor(MIN_ROOM_SIZE/2);
 const SECOND_HALF_MIN_ROOM_SIZE = Math.ceil(MIN_ROOM_SIZE/2);
 
 export async function populateMap(map: DungeonMap, stepper: Stepper) {
-  const rand = new Random(123456);
+  const rand = new Random();
   await placeRooms(map, stepper, rand, 200);
 }
 

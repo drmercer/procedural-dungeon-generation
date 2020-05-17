@@ -3,6 +3,8 @@ import { Box, Point } from "./shape";
 
 export type TileColorFn = (tile: Tile) => string;
 
+const minMapSize = 20;
+
 export async function renderMap(
   context: CanvasRenderingContext2D,
   map: DungeonMap,
@@ -10,10 +12,17 @@ export async function renderMap(
 ) {
   const bounds = map.measure();
   const tileSizePx = Math.min(
-    context.canvas.width / bounds.w,
-    context.canvas.height / bounds.h,
+    context.canvas.width / Math.max(bounds.w, minMapSize),
+    context.canvas.height / Math.max(bounds.h, minMapSize),
   );
+
+  // Clear canvas
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+
+  // Draw default tiles
   drawArea(context, bounds, tileSizePx, bounds, colorFn(map.defaultTile));
+  
+  // Draw contents
   map.forEachNonDefaultTile((tile, pt) => {
     const color = colorFn(tile);
     drawPoint(context, bounds, tileSizePx, pt, color);

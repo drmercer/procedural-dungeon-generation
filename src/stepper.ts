@@ -10,16 +10,19 @@ export abstract class NoopStepper {
 
 export class AnimationStepper extends Stepper {
   constructor(
-    private frameDurationMs = 500,
+    private drawFn: () => Promise<void>,
+    private frameDurationMs = 50,
     private stepFrameCount = 10,
   ) {
     super();
   }
 
   public async tick(): Promise<void> {
+    await this.drawFn();
     return new Promise(res => setTimeout(res, this.frameDurationMs));
   }
   public async step(): Promise<void> {
+    await this.drawFn();
     return new Promise(res => setTimeout(res, this.frameDurationMs * this.stepFrameCount));
   }
 }

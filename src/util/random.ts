@@ -13,4 +13,8 @@ export class Random {
 
     return min + rnd * (max - min);
   }
+
+  public nextInt(max: number = 100, min: number = 0): number {
+    return Math.round(this.next(max, min));
+  }
 }

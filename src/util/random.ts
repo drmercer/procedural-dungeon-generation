@@ -1,18 +1,16 @@
-let seed = Date.now();
+// Seeded PRNG
 
-// Seeded random function
+export class Random {
+  constructor(
+    private seed: number = Date.now(),
+  ) {
+  }
 
-// From http://indiegamr.com/generate-repeatable-random-numbers-in-js/
-export function nextRandom(max?: number, min?: number) {
-  max = max || 1;
-  min = min || 0;
+  // From http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+  public next(max: number = 1, min: number = 0) {
+    this.seed = (this.seed * 9301 + 49297) % 233280;
+    const rnd = this.seed / 233280;
 
-  seed = (seed * 9301 + 49297) % 233280;
-  var rnd = seed / 233280;
-
-  return min + rnd * (max - min);
-}
-
-export function setSeed(newSeed: number) {
-  seed = newSeed;
+    return min + rnd * (max - min);
+  }
 }
